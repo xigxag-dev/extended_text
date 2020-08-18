@@ -20,6 +20,7 @@ class ExtendedText extends StatelessWidget {
     this.locale,
     this.softWrap,
     this.overflow,
+        this.onOverflow,
     this.textScaleFactor,
     this.maxLines,
     this.semanticsLabel,
@@ -50,6 +51,7 @@ class ExtendedText extends StatelessWidget {
     this.locale,
     this.softWrap,
     this.overflow,
+        this.onOverflow,
     this.textScaleFactor,
     this.maxLines,
     this.semanticsLabel,
@@ -73,6 +75,8 @@ class ExtendedText extends StatelessWidget {
   /// maxWidth is equal to textPainter.width
   final TextOverflowWidget overflowWidget;
 
+  //MC overflow trigger callback
+  final Function(int) onOverflow;
   /// Controls how tall the selection highlight boxes are computed to be.
   ///
   /// See [ui.BoxHeightStyle] for details on available styles.
@@ -236,6 +240,7 @@ class ExtendedText extends StatelessWidget {
         locale:
             locale, // RichText uses Localizations.localeOf to obtain a default if this is null
         softWrap: softWrap ?? defaultTextStyle.softWrap,
+        onOverflow: onOverflow,
         overflow: overflow ?? defaultTextStyle.overflow,
         textScaleFactor:
             textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
@@ -260,6 +265,7 @@ class ExtendedText extends StatelessWidget {
             locale, // RichText uses Localizations.localeOf to obtain a default if this is null
         softWrap: softWrap ?? defaultTextStyle.softWrap,
         overflow: overflow ?? defaultTextStyle.overflow,
+        onOverflow: onOverflow,
         textScaleFactor:
             textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
         maxLines: maxLines ?? defaultTextStyle.maxLines,
