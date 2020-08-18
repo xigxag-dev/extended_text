@@ -26,6 +26,8 @@ class ExtendedTextSelection extends StatefulWidget {
       this.textScaleFactor,
       this.overflow,
       this.text,
+        //MC for overflow trigger
+        this.onOverflow,
       this.selectionColor,
       this.dragStartBehavior,
       this.data,
@@ -124,6 +126,11 @@ class ExtendedTextSelection extends StatefulWidget {
   final String data;
 
   final TextSelectionControls textSelectionControls;
+
+  //MC EDIT
+  final Function(int) onOverflow;
+  //MC EDIT
+
 
   @override
   ExtendedTextSelectionState createState() => ExtendedTextSelectionState();
@@ -237,6 +244,7 @@ class ExtendedTextSelectionState extends State<ExtendedTextSelection>
               onCopy: _semanticsOnCopy(_textSelectionControls),
               child: ExtendedRichText(
                 textAlign: widget.textAlign,
+                onOverflow: widget.onOverflow,
                 textDirection: widget
                     .textDirection, // RichText uses Directionality.of to obtain a default if this is null.
                 locale: widget

@@ -26,6 +26,8 @@ class ExtendedRichText extends MultiChildRenderObjectWidget {
     this.textAlign = TextAlign.start,
     this.textDirection,
     this.softWrap = true,
+    //MC for overflow trigger
+    this.onOverflow,
     this.overflow = TextOverflow.clip,
     this.textScaleFactor = 1.0,
     this.maxLines,
@@ -69,6 +71,9 @@ class ExtendedRichText extends MultiChildRenderObjectWidget {
 
   final BoxHeightStyle selectionHeightStyle;
   final BoxWidthStyle selectionWidthStyle;
+
+  //MC for overflow count
+  final Function(int) onOverflow;
 
   /// The range of text that is currently selected.
   final TextSelection selection;
@@ -152,6 +157,8 @@ class ExtendedRichText extends MultiChildRenderObjectWidget {
       textDirection: textDirection ?? Directionality.of(context),
       softWrap: softWrap,
       overflow: overflow,
+      //MC edit for overflow trigger
+      onOverflow: onOverflow,
       textScaleFactor: textScaleFactor,
       maxLines: maxLines,
       strutStyle: strutStyle,

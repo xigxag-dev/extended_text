@@ -39,6 +39,8 @@ class ExtendedRenderParagraph extends ExtendedTextSelectionRenderObject {
     @required LayerLink startHandleLayerLink,
     @required LayerLink endHandleLayerLink,
     this.onSelectionChanged,
+        //MC edit for onOverflow trigger
+        this.onOverflow,
     Color selectionColor,
     TextSelection selection,
     StrutStyle strutStyle,
@@ -91,6 +93,9 @@ class ExtendedRenderParagraph extends ExtendedTextSelectionRenderObject {
   /// Called when the selection changes.
   @override
   TextSelectionChangedHandler onSelectionChanged;
+
+//MC edit for text overflow trigger
+  final Function(int) onOverflow;
 
   @override
   double get preferredLineHeight => _textPainter.preferredLineHeight;
@@ -497,6 +502,12 @@ class ExtendedRenderParagraph extends ExtendedTextSelectionRenderObject {
               Offset(0.0, fadeEnd),
               <Color>[const Color(0xFFFFFFFF), const Color(0x00FFFFFF)],
             );
+
+            //MC Overflow trigger - get the position here
+            var position = textPainter.getPositionForOffset( Offset(0, size.height) );
+            //Trigger the overflow callback
+            onOverflow(position.offset);
+
           }
           break;
       }
